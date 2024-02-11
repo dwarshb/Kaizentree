@@ -1,0 +1,100 @@
+
+/* Import Font Awesome icons */
+@import url('https://use.fontawesome.com/releases/v5.15.4/css/all.css');
+
+/* Use a custom font */
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap');
+* {
+  font-family: 'Roboto', sans-serif;
+}
+
+/* Define some colors */
+:root {
+  --primary-color: #3f51b5;
+  --secondary-color: #f44336;
+  --background-color: #f5f5f5;
+  --text-color: #212121;
+  --light-text-color: #757575;
+  --white-color: #ffffff;
+}
+
+/* Reset some default styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Style the container div */
+.container {
+  display: flex;
+  height: 100vh;
+}
+
+/* Style the sidebar div */
+.sidebar {
+  width: 30%;
+  border-right: 5px solid var(--primary-color);
+}
+
+/* Style the nav list */
+.nav {
+  list-style: none;
+  padding: 20px;
+}
+
+/* Style the nav items */
+.nav-item {
+  margin: 10px 10px;
+  padding:10px;
+}
+
+.nav-item:hover {
+    background-color: lightgrey;
+}
+/* Style the nav links */
+.nav-item a {
+  display: flex;
+  align-items: center;
+  color: #000;
+  text-decoration: none;
+}
+
+/* Style the nav icons */
+.nav-item i {
+  margin-right: 10px;
+}
+
+/* Highlight the active nav item */
+.nav-item.active {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Style the main div */
+.main {
+    padding:20px;
+    width: 85%;
+    background-color: var(--background-color);
+    overflow-y: auto;
+}
+
+/* Style the header div */
+.header {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.itemTable {
+    width: 100%;
+    border-collapse: collapse;
+}
+.item {
+    padding: 16px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+    width: calc(100% / 5);
+}
+.tableHeader{
+    background-color: #f2f2f2;
+}

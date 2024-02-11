@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'kaizentree/styles.css' %}" >
+    <title>Create Account</title>
+</head>
+<body>
+    <div class="login-container">
+        <img src="{% static 'kaizentree/kaizentree_logo.png' %}" alt="Logo" class="logo">
+        
+        <form method="post">
+            {% csrf_token %}
+            {% if error_message %}
+                <script>
+                    alert("{{ error_message }}");
+                </script>
+            {% endif %}
+            <input type="text" name="username" id="username" placeholder="Username" required>
+            <input type="text" name="email" id="email" placeholder="Email" required>
+            <input type="password" name="password" id="password" placeholder="Password" required>
+
+            <div class="buttons">
+                <button type="submit" name="signup">CREATE ACCOUNT</button>
+                <button onclick="window.location.href = {% url 'login' %}" name="login">LOG IN</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
+

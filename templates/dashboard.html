@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'kaizentree/dashboard_style.css' %}" >
+    <title>Create Account</title>
+</head>
+<body>
+    <div class="container">
+      <div class="sidebar">
+        <ul class="nav">
+          <li class="nav-item"><a href="#"><i class="fas fa-home"></i> Home</a></li>
+          <li class="nav-item active"><a href="#"><i class="fas fa-box"></i> Items</a></li>
+          <li class="nav-item"><a href="#"><i class="fas fa-warehouse"></i> Stock</a></li>
+          <li class="nav-item"><a href="#"><i class="fas fa-cubes"></i> Build</a></li>
+          <li class="nav-item"><a href="#"><i class="fas fa-chart-line"></i> Reports</a></li>
+          <li class="nav-item"><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+        </ul>
+      </div>
+      <div class="main">
+        <div class="header">
+          <h1>Item Dashboard</h1>
+          <p>All Items</p>
+          <div class="stats">
+            <div class="stat">
+              <span>Total Categories:</span>
+              <span>4</span>
+            </div>
+            <div class="stat">
+              <span>Total Items:</span>
+              <span>21</span>
+            </div>
+          </div>
+          <div class="buttons">
+            <button class="btn btn-primary">NEW ITEM</button>
+            <button class="btn btn-secondary">NEW CATEGORY</button>
+          </div>
+        </div>
+        <div class="content">
+          <div class="options">
+            <div class="search">
+              <input type="text" placeholder="Search">
+              <button><i class="fas fa-search"></i></button>
+            </div>
+            <div class="layout">
+              <button><i class="fas fa-th-large"></i></button>
+              <button><i class="fas fa-list"></i></button>
+            </div>
+          </div>
+          <table class=".itemTable">
+                  <thead>
+                      <tr>
+                          <th class="tableHeader">SKU</th>
+                          <th class="tableHeader">Name</th>
+                          <th class="tableHeader">Tags</th>
+                          <th class="tableHeader">Category</th>
+                          <th class="tableHeader">In Stocks   </th>
+                          <th class="tableHeader">Available Stock</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      {% for item in items %}
+                      <tr>
+                          <td class="item">{{ item.sku }}</td>
+                          <td class="item">{{ item.name }}</td>
+                          <td class="item">
+                            {% for tag in item.tags.all %}
+                                <p>{{ tag.name }}</p>
+                            {% endfor %}
+                          </td>
+                          <td class="item">{{ item.category }}</td>
+                          <td class="item">{{ item.in_stock }}</td>
+                          <td class="item">{{ item.available_stock }}</td>
+                      </tr>
+                      {% endfor %}
+                  </tbody>
+              </table>
+        </div>
+      </div>
+    </div>
+</body>
+</html>
+
