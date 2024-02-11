@@ -1,0 +1,41 @@
+body, html {
+  margin: 0;
+  height: 100%;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-container {
+  width: 300px;
+}
+
+.logo {
+  display: block;
+  margin-bottom: 20px; /* Adjust as needed */
+}
+
+input[type="text"], input[type="password"] {
+   width: calc(100% - 20px);
+   padding: 10px; /* Adjust as needed */
+   margin-bottom: 20px; /* Adjust as needed */
+}
+.buttons {
+    display: flex;
+}
+.buttons button {
+    padding: 10px;
+    margin: 16px;
+    width: 48%; /* Adjust as needed */
+}
+
+.forgot-password {
+   clear: both; /* Clear float styling from above elements */
+   display: block;
+   text-align: center;
+   margin-top: 20px; /* Adjust as needed */
+}
+

@@ -2,18 +2,34 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    {% load static %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'kaizentree/styles.css' %}" >
     <title>Login</title>
 </head>
 <body>
-    <h2>Login</h2>
-    <form method="post">
-        {% csrf_token %}
-        <label for="username">Username:</label><br>
-        <input type="text" id="username" name="username" required><br>
-        <label for="password">Password:</label><br>
-        <input type="password" id="password" name="password" required><br><br>
-        <input type="submit" value="Login">
-    </form>
+    <div class="login-container">
+        <img src="{% static 'kaizentree/kaizentree_logo.png' %}" alt="Logo" class="logo">
+        
+        <form method="post">
+            {% csrf_token %}
+            {% if error_message %}
+                <script>
+                    alert("{{ error_message }}");
+                </script>
+            {% endif %}
+            <input type="text" name="username" id="username" placeholder="Username" required>
+            <input type="password" name="password" id="password" placeholder="Password" required>
+
+            <div class="buttons">
+                <button type="submit" name="signup">CREATE ACCOUNT</button>
+                <button type="submit" name="login">LOG IN</button>
+            </div>
+
+            <!-- Add link to forgot password page -->
+            <a href="/forgot-password" class="forgot-password">Forgot Password</a>
+        </form>
+    </div>
 </body>
 </html>
 
