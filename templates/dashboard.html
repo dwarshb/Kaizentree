@@ -21,20 +21,27 @@
       </div>
       <div class="main">
         <div class="header">
-          <h1>Item Dashboard</h1>
-          <p>All Items</p>
-          <div class="stats">
-            <div class="stat">
-              <span>Total Categories:</span>
-              <span>4</span>
-            </div>
-            <div class="stat">
-              <span>Total Items:</span>
-              <span>21</span>
-            </div>
-          </div>
-          <div class="buttons">
-            <button class="btn btn-primary">NEW ITEM</button>
+            <table class=".itemTable">
+                <tr>
+                   <td lass="item">
+                      <h1>Item Dashboard</h1>
+                      <p>All Items</p>
+                  </td>
+                  <td class="item">
+                    <div class="stat">
+                      <span>Total Categories:</span>
+                      <span>{{ category_count }}</span>
+                    </div>
+                    <div class="stat">
+                      <span>Total Items:</span>
+                      <span>{{ item_count }}</span>
+                    </div>
+                  </td>
+                <tr/>
+           </table>
+            <br/>
+          <div>
+            <div class="btn-item-category">NEW ITEM CATEGORY</div>
             <button class="btn btn-secondary">NEW CATEGORY</button>
           </div>
         </div>
@@ -70,7 +77,7 @@
                                 <p>{{ tag.name }}</p>
                             {% endfor %}
                           </td>
-                          <td class="item">{{ item.category }}</td>
+                          <td class="item">{{ item.category.name }}</td>
                           <td class="item">{{ item.in_stock }}</td>
                           <td class="item">{{ item.available_stock }}</td>
                       </tr>

@@ -3,7 +3,11 @@ from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.views.generic import ListView
-from .models import Item
+from .models import Item,Category,Tag
+from django.contrib.auth.decorators import login_required
+from .serializers import ItemSerializer, CategorySerializer, TagSerializer
+from rest_framework import generics
+from django.http import JsonResponse
 
 def user_login(request):
     if request.method == 'POST':
@@ -40,7 +44,42 @@ def user_signup(request):
     else:
         return render(request, 'signup.html')
 
+@login_required
 def dashboard(request):
     items = Item.objects.all()
-    return render(request, 'dashboard.html', {'items': items})
+    category_count = Category.objects.count()
+    item_count = Item.objects.count()
+    return render(request, 'dashboard.html', {'items': items,'category_count': category_count, 'item_count': item_count})
     
+class TagCreateView(generics.CreateAPIView):
+    queryset = Tag.objects.all()
+    serializer_class = TagSerializer
+    
+    def post(self, request, *args, **kwargs):
+        # Handle POST request to create a new category
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        return JsonResponse(serializer.data, status=201)
+
+class CategoryCreateView(generics.CreateAPIView):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+    
+    def post(self, request, *args, **kwargs):
+        # Handle POST request to create a new category
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        return JsonResponse(serializer.data, status=201)
+
+class ItemCreateView(generics.CreateAPIView):
+    queryset = Item.objects.all()
+    serializer_class = ItemSerializer
+    
+    def post(self, request, *args, **kwargs):
+        # Handle POST request to create a new category
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        return JsonResponse(serializer.data, status=201)
