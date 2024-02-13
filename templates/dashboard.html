@@ -5,7 +5,7 @@
     {% load static %}
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'kaizentree/dashboard_style.css' %}" >
-    <title>Create Account</title>
+    <title>Dashboard</title>
 </head>
 <body>
     <div class="container">
@@ -17,6 +17,7 @@
           <li class="nav-item"><a href="#"><i class="fas fa-cubes"></i> Build</a></li>
           <li class="nav-item"><a href="#"><i class="fas fa-chart-line"></i> Reports</a></li>
           <li class="nav-item"><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+          <li class="nav-item"<button onclick="window.location.href = {% url 'logout' %}"><i class="fas fas fa-sign-out-alt"></i>Logout</button></li>
         </ul>
       </div>
       <div class="main">
@@ -41,20 +42,22 @@
            </table>
             <br/>
           <div>
-            <div class="btn-item-category">NEW ITEM CATEGORY</div>
-            <button class="btn btn-secondary">NEW CATEGORY</button>
+            <button class="btn-item-category">NEW ITEM CATEGORY</button>
           </div>
         </div>
+        <br/>
+        <br/>
         <div class="content">
           <div class="options">
-            <div class="search">
-              <input type="text" placeholder="Search">
-              <button><i class="fas fa-search"></i></button>
-            </div>
-            <div class="layout">
+              <button class="btn-item-category">NEW ITEM</button>
+              <span class="search">
+                  <input type="text" placeholder="Search">
+                  <button><i class="fas fa-search"></i></button>
+              </span>
+            <span class="layout">
               <button><i class="fas fa-th-large"></i></button>
               <button><i class="fas fa-list"></i></button>
-            </div>
+            </span>
           </div>
           <table class=".itemTable">
                   <thead>

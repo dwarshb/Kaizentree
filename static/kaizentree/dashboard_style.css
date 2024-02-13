@@ -100,3 +100,10 @@
     background-color: green;
     padding: 16px;
 }
+
+.search input {
+    margin-left:24px;
+    margin-right:24px;
+    padding: 16px;
+    width:40%;
+}

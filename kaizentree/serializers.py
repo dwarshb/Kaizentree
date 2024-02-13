@@ -1,6 +1,5 @@
 from rest_framework import serializers
 from .models import Item, Category, Tag
-
 class TagSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tag
@@ -15,3 +14,4 @@ class ItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = Item
         fields = '__all__'
+        

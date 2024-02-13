@@ -1,13 +1,19 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.views.generic import ListView
 from .models import Item,Category,Tag
 from django.contrib.auth.decorators import login_required
 from .serializers import ItemSerializer, CategorySerializer, TagSerializer
-from rest_framework import generics
+from rest_framework import generics,permissions
 from django.http import JsonResponse
+from rest_framework_simplejwt.views import TokenObtainPairView
+from rest_framework_simplejwt.authentication import JWTAuthentication
+from rest_framework.authentication import SessionAuthentication
+from rest_framework.permissions import AllowAny
+from rest_framework.response import Response
+from rest_framework import status
 
 def user_login(request):
     if request.method == 'POST':
@@ -44,6 +50,11 @@ def user_signup(request):
     else:
         return render(request, 'signup.html')
 
+def user_logout(request):
+    logout(request)
+    # Redirect to the desired page after logout (e.g., home page)
+    return redirect('login')
+    
 @login_required
 def dashboard(request):
     items = Item.objects.all()
@@ -51,9 +62,20 @@ def dashboard(request):
     item_count = Item.objects.count()
     return render(request, 'dashboard.html', {'items': items,'category_count': category_count, 'item_count': item_count})
     
+class ObtainTokenView(TokenObtainPairView):
+  
+    def post(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            return Response(serializer.validated_data, status=status.HTTP_200_OK)
+
+
+
 class TagCreateView(generics.CreateAPIView):
     queryset = Tag.objects.all()
     serializer_class = TagSerializer
+    authentication_classes = [JWTAuthentication, SessionAuthentication]
+    permission_classes = [permissions.IsAuthenticated]
     
     def post(self, request, *args, **kwargs):
         # Handle POST request to create a new category
@@ -65,6 +87,8 @@ class TagCreateView(generics.CreateAPIView):
 class CategoryCreateView(generics.CreateAPIView):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
+    authentication_classes = [JWTAuthentication, SessionAuthentication]
+    permission_classes = [permissions.IsAuthenticated]
     
     def post(self, request, *args, **kwargs):
         # Handle POST request to create a new category
@@ -76,6 +100,8 @@ class CategoryCreateView(generics.CreateAPIView):
 class ItemCreateView(generics.CreateAPIView):
     queryset = Item.objects.all()
     serializer_class = ItemSerializer
+    authentication_classes = [JWTAuthentication, SessionAuthentication]
+    permission_classes = [permissions.IsAuthenticated]
     
     def post(self, request, *args, **kwargs):
         # Handle POST request to create a new category

@@ -97,6 +97,12 @@
     width: 25%;
     text-align:center;
     color: white;
-    background-color: green;
+    background-color: red;
     padding: 16px;
+}
+
+.search {
+    background-color: red;
+    padding: 16px;
+    width:100%;
 }
