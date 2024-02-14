@@ -13,3 +13,8 @@ class Item(models.Model):
     category = models.ManyToManyField(Category)
     in_stock = models.IntegerField()
     available_stock = models.IntegerField()
+
+class User(models.Model):
+    username = models.CharField(max_length=250)
+    email = models.CharField(max_length=250)
+    password = models.CharField(max_length=250)

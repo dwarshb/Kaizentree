@@ -3,9 +3,9 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.views.generic import ListView
-from .models import Item,Category,Tag
+from .models import Item,Category,Tag,User
 from django.contrib.auth.decorators import login_required
-from .serializers import ItemSerializer, CategorySerializer, TagSerializer
+from .serializers import ItemSerializer, CategorySerializer, TagSerializer, UserSerializer
 from rest_framework import generics,permissions
 from django.http import JsonResponse
 from rest_framework_simplejwt.views import TokenObtainPairView
@@ -70,6 +70,16 @@ class ObtainTokenView(TokenObtainPairView):
             return Response(serializer.validated_data, status=status.HTTP_200_OK)
 
 
+class CreateUserView(generics.CreateAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    
+    def post(self, request, *args, **kwargs):
+        # Handle POST request to create a new category
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        return JsonResponse(serializer.data, status=201)
 
 class TagCreateView(generics.CreateAPIView):
     queryset = Tag.objects.all()

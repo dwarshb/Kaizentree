@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from .views import user_login,user_signup,user_logout,dashboard,TagCreateView,CategoryCreateView,ObtainTokenView,ItemCreateView
+from .views import user_login,user_signup,user_logout,dashboard,TagCreateView,CategoryCreateView,ObtainTokenView,ItemCreateView,CreateUserView
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -26,6 +26,7 @@ urlpatterns = [
     path('logout/', user_logout, name='logout'),
     path('home/', dashboard, name='home'),
     path('api/token/', ObtainTokenView.as_view(), name='token'),
+    path('api/createuser/', CreateUserView.as_view(), name='createuser'),
     path('api/tag/', TagCreateView.as_view(), name='tag-create'),
     path('api/category/', CategoryCreateView.as_view(), name='category-create'),
     path('api/item/', ItemCreateView.as_view(), name='item-create')
